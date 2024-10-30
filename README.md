@@ -36,3 +36,7 @@ The dataset used in this project is a publicly available credit card transaction
 # Results
 The notebook evaluates multiple machine learning models, including Logistic Regression, Decision Trees, Random Forests, and Gradient Boosting. The performance of these models is compared based on metrics like precision, recall, F1-score, and ROC-AUC.
 
+# Acknowledgements
+Special thanks to Kaggle for providing the dataset.
+Inspired by the work of various data science practitioners and researchers in the field of fraud detection.
+
