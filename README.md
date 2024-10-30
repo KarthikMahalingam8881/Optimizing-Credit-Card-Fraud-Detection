@@ -1,71 +1,38 @@
 # Credit-Card-Fraud-Detection-Code
-# Energy-consumption-forecasting
-# Final Project - CSE 572 Data Mining
+This project focuses on building and evaluating machine learning models to detect fraudulent credit card transactions. The goal is to identify fraudulent transactions from a dataset using various algorithms and compare their performance.
 
-## Project Overview
-This project is part of the CSE 572 Data Mining course. The objective is to apply data mining techniques to a given dataset and analyze the results. The project involves preprocessing the data, training a machine learning model, evaluating its performance, and visualizing the results.
+# Table of Contents
+- Project Overview
+- Team Members
+- Dataset
+- Dependencies
+- Results
+- Source Code
+- Acknowledgements
 
-## Team Members
+# Project Overview
+Credit card fraud is a significant problem in financial institutions. This project implements machine learning techniques to detect fraud in credit card transactions. The primary objectives are to preprocess the data, build and evaluate different classification models, and determine the best-performing model.
+
+# Team Members
 - Karthik Mahalingam
-- Prasuk Jain
-- Vedanth Prasanna Bharadwaj
-- Pratik Dnyaneshwar Kale
-
-## Requirements
-- Python 3.11.5
-- Jupyter Notebook
-- NumPy
-- Pandas
-- Matplotlib
-- Scikit-learn
-- PyTorch
-
-## Usage
-1. Open the `FinalProject-CSE572-DataMining.ipynb` notebook in Jupyter.
-2. Follow the steps in the notebook to preprocess the data, train the model, and evaluate its performance.
-3. The notebook includes visualizations to help understand the results.
-
-## Project Structure
-- `FinalProject-CSE572-DataMining.ipynb`: Jupyter Notebook containing the code and analysis.
-- `data/`: Directory containing the dataset (except electricity.csv, other dataset are included in the repository).
-- `models/`: Directory to save trained models(not included in the repository).
-- `results/`: Directory to save the results and visualizations (not included in the repository).
-
-## Key Functions and Classes
-- `preprocess_data()`: Function to preprocess the data.
-- `train_epoch()`: Function to train the model for one epoch.
-- `evaluate()`: Function to evaluate the model.
-- `plot_results()`: Function to plot the training and testing losses.
-
-## Data Preprocessing
-The data preprocessing step includes handling missing values, encoding categorical variables, and splitting the data into training and testing sets.
-
-## Model Training
-A PyTorch model is trained using the training data. The model's performance is evaluated on the test data, and the losses are plotted to visualize the training process.
-
-## Scikit-learn Models
-In addition to the PyTorch model, several Scikit-learn models are also trained and evaluated. These models include:
-- Logistic Regression
-- Random Forest
-- Support Vector Machine (SVM)
-- Gradient Boosting
-
-## Key Features
-- Comprehensive data preprocessing pipeline.
-- Training and evaluation of multiple machine learning models.
-- Visualization of training and testing losses.
-- Comparison of model performance using various metrics.
-- Saving and loading trained models for future use.
+- Ankitha Dongerkerry Pai
   
-## Evaluation
-The model's performance is evaluated using appropriate metrics, and the results are visualized for better understanding.
+# Dataset
+The dataset used in this project is a publicly available credit card transaction dataset, which contains transactions made by European cardholders in September 2013. The dataset consists of 284,807 transactions, where 492 are frauds. The dataset is highly imbalanced, with the positive class (frauds) accounting for only 0.172% of all transactions.
 
-## Results
-The results of the model training and evaluation are plotted using Matplotlib to provide insights into the model's performance.
+- Features: The dataset contains 30 features, including the 'Time' and 'Amount' of the transactions, as well as 28 anonymized features labeled V1 to V28.
+- Target: The 'Class' column indicates whether the transaction is fraudulent (1) or not (0).
 
-## Contributing
-If you wish to contribute to this project, please fork the repository and submit a pull request.
+# Dependencies
+- Python 3.6 or higher
+- Jupyter Notebook
+- Pandas
+- NumPy
+- Scikit-learn
+- Matplotlib
+- Seaborn
+- Imbalanced-learn
 
-## Acknowledgments
-This project was developed as part of the CSE 572 Data Mining course. Special thanks to the course instructors and teaching assistants for their guidance and support.
+# Results
+The notebook evaluates multiple machine learning models, including Logistic Regression, Decision Trees, Random Forests, and Gradient Boosting. The performance of these models is compared based on metrics like precision, recall, F1-score, and ROC-AUC.
 
