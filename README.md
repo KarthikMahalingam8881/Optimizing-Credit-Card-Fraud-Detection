@@ -1,107 +1,99 @@
 
-# Credit Card Fraud Detection
+# 💳 Credit Card Fraud Detection Project
 
-This project is focused on building a robust credit card fraud detection system using various machine learning and deep learning models. The goal is to identify fraudulent transactions with high accuracy, ensuring financial institutions can reduce losses and enhance security measures.
+## 1️⃣ Business Problem
+Credit card fraud is a major concern for financial institutions, leading to billions of dollars in annual losses. Fraudulent transactions must be detected in real-time to prevent losses while minimizing disruptions to legitimate transactions. The key challenge is that fraud cases are extremely rare (highly imbalanced dataset), making detection difficult.
 
----
+## 2️⃣ Objective
+The goal was to develop a machine learning pipeline that accurately detects fraudulent transactions while balancing key trade-offs:
 
-## Project Overview
+- **Minimizing False Negatives**: To ensure that fraudulent transactions are not missed.
+- **Reducing False Positives**: To avoid unnecessary declines of legitimate transactions.
+- **Providing Interpretable Insights**: So financial institutions can take proactive fraud prevention measures.
 
-### Objectives
+### Key evaluation metrics:
+- **Recall (Sensitivity)**: Measures how many fraudulent transactions are correctly identified.
+- **Precision**: Ensures flagged transactions are actually fraud.
+- **F1-Score**: Balances precision and recall.
+- **AUC-ROC Score**: Evaluates how well the model distinguishes fraud from non-fraud.
+- **Business Metrics**: Includes fraud savings and false positive rate.
 
-1. Analyze and preprocess imbalanced credit card transaction data.
-2. Explore and visualize patterns in fraudulent and non-fraudulent transactions.
-3. Build and evaluate classification models to detect fraudulent transactions.
-4. Compare multiple approaches, including Random Forest, SVM, Neural Networks, and PyTorch-based models.
+## 3️⃣ Data Preprocessing and Feature Engineering
 
-### Dataset Description
+### 📌 Data Cleaning
+- Removed duplicate transactions to ensure unbiased model training.
+- Checked for and handled missing values to maintain data integrity.
 
-- **Dataset Size**: ~284,000 transactions.
-- **Features**: 30 anonymized features (V1-V28), Time, Amount, and Class.
-- **Target Variable**: 
-  - `Class`: 0 = Non-fraudulent, 1 = Fraudulent.
-- **Imbalance**: Only 0.17% of transactions are fraudulent.
+### 📌 Handling Outliers
+- Used **Interquartile Range (IQR)** to identify extreme values in fraudulent transactions.
+- Instead of removing them, I **flagged them as a new feature** (**Fraudulent_Outlier_Flag**).
+- This helped the model learn high-value fraudulent transaction patterns.
 
----
+### 📌 Exploratory Data Analysis (EDA)
+- **Transaction Timing Analysis**: Fraudulent transactions had distinct time patterns.
+- **Distribution of Transaction Amounts**: Fraudulent transactions showed higher variance in amounts.
+- **Correlation Analysis**: Identified key variables impacting fraud detection.
 
-## Workflow
+### 📌 Feature Engineering
+Created new features to improve fraud detection:
+- **Interaction Features**: (Amount * V20, V17 * V12, etc.) captured complex fraud patterns.
+- **Statistical Features**: (Z_Amount, Rolling_Mean_Amount) helped standardize and track unusual spending.
+- **Flag Variables**: (High_V3_Flag, Low_V20_Flag) identified unusual transaction behaviors.
 
-### 1. Data Exploration and Visualization
+## 4️⃣ Model Development
 
-- **Class Imbalance**: Severe imbalance with a majority of transactions being non-fraudulent.
-- **Feature Correlation**: Analyzed feature relationships using heatmaps and pairwise plots.
-- **Temporal Analysis**: Explored fraud trends across different times of the day.
-- **Transaction Amounts**: Compared fraud vs. non-fraud distributions.
+### 📌 Machine Learning Models Used
+#### **Random Forest (Best Model)**
+- Trained with **SMOTE** to handle class imbalance.
+- Achieved high fraud detection accuracy while reducing false positives.
+- **AUC-ROC Score**: 0.98.
 
-### 2. Data Preprocessing
+#### **XGBoost**
+- Used for comparison and deeper fraud insights.
+- Performed well but slightly less interpretable than Random Forest.
 
-- Handled missing data by using interpolation techniques.
-- Normalized transaction amounts to standardize input features.
-- Created additional features, such as `Hour` from the `Time` variable, for temporal insights.
+#### **SVM and Anomaly Detection Models**
+- Explored **Isolation Forest and One-Class SVM** for anomaly detection.
+- Helped in identifying patterns but not as effective for large-scale classification.
 
-### 3. Modeling Approaches
+### 📌 Hyperparameter Tuning
+- Used **Halving Random Search CV** for optimizing Random Forest parameters.
+- This reduced training time while improving model performance.
 
-#### a. Random Forest Classifier
-- Feature importance analysis for model interpretability.
-- Achieved **[85.3%]**.
+## 5️⃣ Results and Business Impact
 
-#### b. Support Vector Machine (SVM)
-- Evaluated performance with a radial basis kernel.
-- Accuracy: **[80%]**.
+### 📌 Key Metrics and Outcomes
+| Metric | Value |
+|--------|------|
+| **Total Fraudulent Amount Flagged** | **$20,551.38** |
+| **Actual Fraudulent Amount Detected** | **$10,502.43** |
+| **Savings Percentage** | **51.10%** |
+| **False Positive Rate** | **0.24%** |
+| **Fraud Detection Rate Improvement** | **25% over baseline** |
 
-#### c. Neural Networks
-- Developed deep learning models using TensorFlow and PyTorch.
-- Included techniques like dropout layers to prevent overfitting.
-- Performance: **[96%]**.
+### 📌 Feature Importance Analysis
+- **Top fraud-driving features** included **V4, V14, V12, and Amount_Time_V14**.
+- **Interaction terms** improved the model’s fraud detection ability.
 
-### 4. Evaluation Metrics
+### 📌 Financial Impact
+- By **reducing false positives**, the model minimizes disruptions to legitimate customers.
+- **Improved fraud detection** translates to **millions in potential savings** for financial institutions.
+- The insights from **feature importance** provide **actionable fraud prevention strategies**.
 
-- Used metrics such as **ROC-AUC Score**, **Accuracy**, and **Confusion Matrix** to evaluate models.
-- Focused on minimizing false negatives, which have a significant business impact.
-
----
-
-# Team Members
-- Karthik Mahalingam
-- Ankitha Dongerkerry Pai
-
----
-
-## Tools and Libraries
-
-- **Programming Language**: Python
-- **Libraries**: `pandas`, `numpy`, `matplotlib`, `seaborn`, `scikit-learn`, `TensorFlow`, `PyTorch`, `XGBoost`, `LightGBM`.
-- **Visualization**: `Plotly`, `Matplotlib`, `Seaborn`.
-
----
-
-## Key Results
-
-1. **Random Forest**: Identified as the most effective model for this dataset due to its ability to handle class imbalance.
-2. **Neural Networks**: Provided high precision but required more computational resources.
-3. **Feature Importance**:
-   - Key features: `V4`, `V12`, `Amount`, `V17`.
-
----
-
-## Business Impact
-
-### Problem Addressed
+### 📌 Problem Addressed
 Credit card fraud causes significant financial losses, damages brand trust, and leads to operational inefficiencies in dispute resolution.
 
-### Value Delivered
-1. **Fraud Mitigation**:
-   - Reduced false negatives to identify fraud early and prevent unauthorized transactions.
-2. **Cost Efficiency**:
-   - Decreased operational costs related to manual review of flagged transactions.
-3. **Customer Trust**:
-   - Enhanced customer trust through proactive fraud detection, leading to improved brand loyalty.
-4. **Scalability**:
-   - The models are scalable for real-time implementation in transaction monitoring systems.
+### 📌 Value Delivered
+  1. **Fraud Mitigation**:
+     - Reduced false negatives to identify fraud early and prevent unauthorized transactions.
+  2. **Cost Efficiency**:
+     - Decreased operational costs related to manual review of flagged transactions.
+  3. **Customer Trust**:
+     - Enhanced customer trust through proactive fraud detection, leading to improved brand loyalty.
+  4. **Scalability**:
+     - The models are scalable for real-time implementation in transaction monitoring systems.
 
----
-
-## Recommendations
+## 6️⃣ Recommendations
 
 1. **Short-Term**:
    - Deploy Random Forest for immediate fraud detection.
@@ -112,7 +104,13 @@ Credit card fraud causes significant financial losses, damages brand trust, and 
    - Integrate the model with real-time systems for live fraud detection.
    - Regularly retrain models to adapt to evolving fraud patterns.
 
----
+## 7️⃣ Future Work
+1. Incorporate additional data sources, such as IP addresses and transaction locations.
+2. Implement ensemble models for enhanced performance.
+3. Explore explainable AI methods to improve model transparency.
+ 
+## 8️⃣ Conclusion
+This project successfully built a highly accurate fraud detection system that balances fraud detection with minimal disruptions to real customers. By leveraging **advanced machine learning techniques, feature engineering, and anomaly detection**, the model enhances existing fraud prevention systems. The approach provides **scalable, interpretable, and financially valuable solutions** for the banking industry.
 
 ## How to Run the Project
 
@@ -120,7 +118,4 @@ Credit card fraud causes significant financial losses, damages brand trust, and 
    ```bash
    git clone https://github.com/your-username/credit-card-fraud-detection.git
 
-## Future Work
-1. Incorporate additional data sources, such as IP addresses and transaction locations.
-2. Implement ensemble models for enhanced performance.
-3. Explore explainable AI methods to improve model transparency.
+
