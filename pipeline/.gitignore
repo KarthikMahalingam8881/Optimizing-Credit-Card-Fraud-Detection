@@ -1,0 +1,16 @@
+# Ignore Python cache and logs
+__pycache__/
+*.pyc
+*.log
+
+# Ignore local/sensitive config
+.env
+config.py
+aws.env
+
+# Ignore system files
+.DS_Store
+.vscode/
+
+# Ignore Airflow logs
+logs/
